@@ -1,7 +1,8 @@
 import React from 'react';
 import nba from 'nba';
 import { Profile } from "./Profile";
-import {DataViewContainer} from "./DataViewContainer"
+import { DataViewContainer } from "./DataViewContainer"
+import { SearchBar } from "./SearchBar"
 
 export class Main extends React.Component {
   state = {
@@ -9,12 +10,21 @@ export class Main extends React.Component {
     playerInfo: {},
   }
 
+  handleSelectPlayer = (name) => {
+    this.loadPlayerInfo(name);
+  }
+
   componentDidMount() {
-    nba.stats.playerInfo({ PlayerID: this.state.playerId }).then((info) => {
+    this.loadPlayerInfo("James Harden");
+  }
+
+  loadPlayerInfo = (playerName) => {
+    const id = nba.findPlayer(playerName).playerId;
+    nba.stats.playerInfo({ PlayerID: id }).then((info) => {
       const playerInfo = Object.assign(info.commonPlayerInfo[0], info.playerHeadlineStats[0]);
       console.log(playerInfo);
       this.setState({
-        playerInfo: playerInfo,
+        playerInfo: playerInfo
       });
     });
   }
@@ -22,8 +32,11 @@ export class Main extends React.Component {
   render() {
     return (
       <div className="main">
-        <Profile playerId={this.state.playerId} playerInfo={this.state.playerInfo}/>
-        <DataViewContainer playerId={this.state.playerId}/>
+        <SearchBar handleSelectPlayer={this.handleSelectPlayer}/>
+        <div className="player">
+          <Profile playerId={this.state.playerId} playerInfo={this.state.playerInfo}/>
+          <DataViewContainer playerId={this.state.playerId}/>
+        </div>
       </div>
     );
   }
