@@ -1,4 +1,14 @@
 .profile {
   width: 200px;
-  background-color: red;
+  background: #ccc;
+}
+
+.player_logo {
+  width: 100%;
+}
+
+.team_logo {
+  display: block;
+  margin: auto;
+  width: 50%;
 }
