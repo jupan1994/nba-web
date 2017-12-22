@@ -1,11 +1,11 @@
 import React from 'react';
-import { ShotChart } from "./ShotChart";
-import nba from "nba";
-import { Profile } from "./Profile"
+import nba from 'nba';
+import { ShotChart } from './ShotChart';
+import { Profile } from "./Profile";
 
 export class Main extends React.Component {
   state = {
-    playerId: nba.findPlayer("James Harden").playerId,
+    playerId: nba.findPlayer('Tony Park').playerId,
     playerInfo: {},
   }
 
