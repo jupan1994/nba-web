@@ -5,15 +5,13 @@ export class CountSlider extends React.Component {
   state = {
     inputValue: 2,
   }
-
   onChange = (value) => {
     value = Number(value) || 2;
     this.setState({
-      inputValue: isNaN(Number(value)) ? 2 : value,
+      inputValue: value,
     });
     this.props.onCountSliderChange(value);
   }
-
   render() {
     return (
       <Row>
